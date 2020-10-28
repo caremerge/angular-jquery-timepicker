@@ -64,7 +64,6 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
                             sec: '2-digit'
                         }));
                     }
-                    console.log("Date: ", date);
                 }
                 if (!element.is(':focus') && !invalidInput()) {
                     element.timepicker('setTime', date);
