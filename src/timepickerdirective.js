@@ -27,6 +27,7 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
             ngModel: '=',
             baseDate: '=',
             uiTimepicker: '=',
+            timeZone: '='
         },
         priority: 1,
         link: function(scope, element, attrs, ngModel) {
@@ -34,6 +35,7 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
             var config = angular.copy(uiTimepickerConfig);
             var asMoment = config.asMoment || false;
             delete config.asMoment;
+            var timeZone = scope.timeZone;
 
             ngModel.$render = function() {
                 var date = ngModel.$modelValue;
@@ -45,6 +47,23 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
                 }
                 if (isAMoment(date)) {
                     date = date.toDate();
+                    if(timeZone) {
+                        // javascript Date is stored in UTC. Default behaviour of moment.toDate() is to ignore timezone.
+                        // our requirement is to show calendar in facility timezone rathen than local timezone. 
+                        // used toLocaleString function to get date and time for the given timezone
+                        // removing the timezone part to generate the same time in local time
+                        // e.g Oct 01, 2020 12PM CDT (date in timezone) will be Oct 01, 2020 12PM PKT (local date)
+                        date = new Date(date.toLocaleString('en-US', {
+                            timeZone: timeZone, 
+                            month: 'short', 
+                            weekday: 'short', 
+                            day: '2-digit', 
+                            year: 'numeric', 
+                            hour: '2-digit', 
+                            minute: '2-digit',
+                            sec: '2-digit'
+                        }));
+                    }
                 }
                 if (!element.is(':focus') && !invalidInput()) {
                     element.timepicker('setTime', date);

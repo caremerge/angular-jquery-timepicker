@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Recras/angular-jquery-timepicker.git"
+    "url": "git@github.com:caremerge/angular-jquery-timepicker.git"
   },
-  "author": "https://github.com/Recras/angular-jquery-timepicker/graphs/contributors",
+  "author": "https://github.com/caremerge/angular-jquery-timepicker/graphs/contributors",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Recras/angular-jquery-timepicker/issues"
+    "url": "https://github.com/caremerge/angular-jquery-timepicker/issues"
   },
-  "homepage": "https://github.com/Recras/angular-jquery-timepicker"
+  "homepage": "https://github.com/caremerge/angular-jquery-timepicker"
 }
